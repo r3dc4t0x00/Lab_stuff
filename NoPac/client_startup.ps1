@@ -1,11 +1,22 @@
 ##CLIENT
 
 if ((gwmi win32_computersystem).partofdomain -eq $true) {
-    write-host -fore green "Have fun exploiting NoPac!"
-} else {
-    write-host -fore red "Please wait untill we are dont provisioning"
 
-    #listen for DC for DNS
+write-host -fore green "Have fun exploiting NoPac!"
+
+$wshell = New-Object -ComObject Wscript.Shell
+
+$wshell.Popup("Your lab is configured, have fun!",0,"Exploit away!",0x1)
+
+} else {
+
+write-host -fore red "Please wait untill we are dont provisioning"
+
+$wshell = New-Object -ComObject Wscript.Shell
+
+$wshell.Popup("Please wait while we configure the lab",0,"Script Running...",0x1)
+
+#listen for DC for DNS
 
 $port=2050
 $IPEndPoint=New-Object System.Net.IPEndPoint([IPAddress]::Any,$port)
