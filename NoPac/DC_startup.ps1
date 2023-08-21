@@ -1,9 +1,20 @@
 ##DC
 
 if ((gwmi win32_computersystem).partofdomain -eq $true) {
-    write-host -fore green "Have fun exploiting NoPac!"
+
+write-host -fore green "Have fun exploiting NoPac!"
+
+$wshell = New-Object -ComObject Wscript.Shell
+
+$wshell.Popup("Install Complete",0,"Done",0x1)
+
 } else {
-    write-host -fore red "Please wait untill we are dont provisioning"
+
+write-host -fore red "Please wait untill we are dont provisioning"
+
+$wshell = New-Object -ComObject Wscript.Shell
+
+$wshell.Popup("Please wait while we configure the lab",0,"Script Running...",0x1)
 
 Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
 
