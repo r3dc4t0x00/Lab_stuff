@@ -22,7 +22,7 @@ $setupcred= ConvertTo-SecureString –AsPlainText -Force -String #
 Install-ADDSForest -DomainName "nopac.local" -DomainNetBiosName "NOPAC" -InstallDns -SafeModeAdministratorPassword $setupcred -NoRebootOnCompletion -Confirm:$false
 
 $PASSWORD= ConvertTo-SecureString –AsPlainText -Force -String password123!
-New-ADUser -Name "Bobby Tables" -GivenName "Bobby" -Surname "Tables" -SamAccountName "btables" -AccountPassword (Read-Host -AsSecureString "Input User Password") -ChangePasswordAtLogon $False -Company "Cybrary" -Title "CEO" -State "Virginia" -City "Glen Allen" -Description "Bobby Tables Helpdesk user 6" -EmployeeNumber "6" -Department "Help Desk" -DisplayName "Bobby Tables" -Country "us" -PostalCode "23059" -Enabled $True
+New-ADUser -Name "Bobby Tables" -GivenName "Bobby" -Surname "Tables" -SamAccountName "btables" -AccountPassword $PASSWORD -ChangePasswordAtLogon $False -Company "Cybrary" -Title "CEO" -State "Virginia" -City "Glen Allen" -Description "Bobby Tables Helpdesk user 6" -EmployeeNumber "6" -Department "Help Desk" -DisplayName "Bobby Tables" -Country "us" -PostalCode "23059" -Enabled $True
 
 $PASSWORDDA= ConvertTo-SecureString –AsPlainText -Force -String password123!
 New-ADUser -Name "DAdmin" -Description "Domain Admin" -Enabled $true -AccountPassword $PASSWORDDA
