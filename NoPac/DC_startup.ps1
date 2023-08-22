@@ -16,9 +16,10 @@ $wshell = New-Object -ComObject Wscript.Shell
 
 $wshell.Popup("Please wait while we configure the lab",0,"Script Running...",0x1)
 
-Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
+#Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
 
-Install-ADDSForest -DomainName "nopac.local" -DomainNetBiosName "NOPAC" -InstallDns:$true -NoRebootCompletion:$true
+$setupcred= ConvertTo-SecureString –AsPlainText -Force -String #
+Install-ADDSForest -DomainName "nopac.local" -DomainNetBiosName "NOPAC" -InstallDns -SafeModeAdministratorPassword $setupcred -NoRebootOnCompletion -Confirm:$false
 
 $PASSWORD= ConvertTo-SecureString –AsPlainText -Force -String password123!
 New-ADUser -Name "Bobby Tables" -GivenName "Bobby" -Surname "Tables" -SamAccountName "btables" -AccountPassword (Read-Host -AsSecureString "Input User Password") -ChangePasswordAtLogon $False -Company "Cybrary" -Title "CEO" -State "Virginia" -City "Glen Allen" -Description "Bobby Tables Helpdesk user 6" -EmployeeNumber "6" -Department "Help Desk" -DisplayName "Bobby Tables" -Country "us" -PostalCode "23059" -Enabled $True
