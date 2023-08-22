@@ -69,7 +69,7 @@ Function Send-StringOverTcp (
 
 #send string to all hosts to trigger join
 $list = 1..255 -replace '^',$net
-Send-StringOverTcp -DataToSend $DNS -Hostname $list -Port 2050
+foreach ($strlist in $list) { Start-Job -ScriptBlock { Send-StringOverTcp -DataToSend $DNS -Hostname $list -Port 2050 } }
 
 sleep 30
 
